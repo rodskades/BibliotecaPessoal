@@ -86,7 +86,33 @@ def listar():
     Uma função para listar os livros.
     :return:
     """
-    pass
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute(
+        """SELECT l.idlivros AS 'Código', l.nome AS 'Nome', g.genero AS 'Gênero', a.nome AS 'Autor', e.nome AS 
+        'Editora', l.paginas AS 'Número de Páginas', l.terminado AS 'Concluído?'
+            FROM livros AS l, generos AS g, autores AS a, editoras AS e, livros_editoras AS le
+            WHERE l.id_genero = g.idgeneros AND l.id_autor = a.idautores AND l.idlivros = le.id_livro AND 
+            le.id_editora = e.ideditoras;
+        """
+    )
+
+    livros = cursor.fetchall()
+    if len(livros) > 0:
+        print("Livros registrados: ")
+        print("--------------------")
+        for livro in livros:
+            print(f'ID: {livro[0]}')
+            print(f'Nome: {livro[1]}')
+            print(f'Gênero: {livro[2]}')
+            print(f'Autor: {livro[3]}')
+            print(f'Editora: {livro[4]}')
+            print(f'Número de Páginas: {livro[5]}')
+            print(f'Concluído? {livro[6]}')
+            print("--------------------")
+    else:
+        print('Não existem livros registrados ainda.')
+    desconectar(conn)
 
 
 def inserir_genero():
