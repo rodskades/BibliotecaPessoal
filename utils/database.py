@@ -89,7 +89,7 @@ def listar():
     conn = conectar()
     cursor = conn.cursor()
     cursor.execute(
-        """SELECT l.idlivros AS 'Código', l.nome AS 'Nome', g.genero AS 'Gênero', a.nome AS 'Autor', e.nome AS 
+        """SELECT l.idlivros AS 'Código', l.nome AS 'Nome', g.generos AS 'Gênero', a.nome AS 'Autor', e.nome AS 
         'Editora', l.paginas AS 'Número de Páginas', l.terminado AS 'Concluído?'
             FROM livros AS l, generos AS g, autores AS a, editoras AS e, livros_editoras AS le
             WHERE l.id_genero = g.idgeneros AND l.id_autor = a.idautores AND l.idlivros = le.id_livro AND 
@@ -124,7 +124,7 @@ def inserir_genero():
     cursor = conn.cursor()
     genero = input("Informe o gênero: ")
 
-    cursor.execute(f"INSERT INTO generos (genero) VALUES ('{genero}')")
+    cursor.execute(f"INSERT INTO generos (generos) VALUES ('{genero}')")
     conn.commit()
 
     if cursor.rowcount == 1:
