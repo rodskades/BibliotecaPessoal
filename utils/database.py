@@ -15,8 +15,16 @@ AUTOR:
     R. K. O. Silva, <rodolpho_kades@hotmail.com>
 """
 
+# ------- #
+# Imports #
+# ------- #
+
 import sqlite3
 
+
+# ----------- #
+#   Módulo    #
+# ----------- #
 
 def conectar():
     """
