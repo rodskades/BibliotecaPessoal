@@ -11,9 +11,12 @@ informações sobre os meus livros.
 O banco de dados foi modelado utilizando o MySQL Workbench e
 possui a seguinte forma:
 
-<img src="images/database.png" width="400px" align="center"/>
+<div align="center">
+    <img src="images/database.png" width="400px"/>
+</div>
 
-
+Com a modelagem, os comandos SQL foram utilizados no módulo
+database.py para gerar as tabelas.
 
 ------------------------------
 Contato:
