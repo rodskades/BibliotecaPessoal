@@ -115,129 +115,64 @@ def listar():
     desconectar(conn)
 
 
-def inserir_genero():
+def inserir(table):
     """
-    Função para inserir dados na tabela generos.
+    Função para inserir dados no banco de dados.
+    :param table: str
     :return: None
     """
     conn = conectar()
     cursor = conn.cursor()
-    genero = input("Informe o gênero: ")
+    if table in ['generos', 'Generos', 'GENEROS']:
+        genero = input("Informe o gênero: ")
 
-    cursor.execute(f"INSERT INTO generos (generos) VALUES ('{genero}')")
-    conn.commit()
+        cursor.execute(f"INSERT INTO generos (generos) VALUES ('{genero}')")
+        conn.commit()
+
+    elif table in ['autores', 'Autores', 'AUTORES']:
+        autor = input("Informe o nome do autor: ")
+
+        cursor.execute(f"INSERT INTO autores (nome) VALUES ('{autor}')")
+        conn.commit()
+
+    elif table in ['editoras', 'Editoras', 'EDITORAS']:
+        editora = input("Informe o nome da editora: ")
+
+        cursor.execute(f"INSERT INTO editoras (nome) VALUES ('{editora}')")
+        conn.commit()
+
+    elif table in ['livros', 'Livros', 'LIVROS']:
+        nome = input("Informe o nome do livro: ")
+        paginas = int(input("Informe o número de páginas: "))
+        terminado = input("Terminado? (Sim ou Não): ")
+        id_genero = int(input("Código do gênero: "))
+        id_autor = int(input("Código do autor: "))
+
+        cursor.execute(f"INSERT INTO livros (nome, paginas, terminado, id_genero, id_autor) VALUES "
+                       f"('{nome}', {paginas}, '{terminado}', {id_genero}, {id_autor})")
+        conn.commit()
+
+    elif table in ['livros_editoras', 'Livros_editoras', 'LIVROS_EDITORAS']:
+        id_livro = int(input("Informe o código do livro: "))
+        id_editora = int(input("Código da editora: "))
+
+        cursor.execute(f"INSERT INTO livros_editoras (id_livro, id_editora) VALUES ({id_livro}, {id_editora})")
+        conn.commit()
+
+    elif table in ['complementos', 'Complementos', 'COMPLEMENTOS']:
+        id_base = int(input("Código do livro base: "))
+        id_comp = int(input("Código do livro complemento: "))
+
+        cursor.execute(f"INSERT INTO complementos (id_livro_base, id_livro_complementar) VALUES ({id_base}, {id_comp})")
+        conn.commit()
+
+    else:
+        print("Tabela não encontrada.")
 
     if cursor.rowcount == 1:
-        print(f'O gênero {genero} foi inserido com sucesso.')
+        print("Dados inseridos com sucesso.")
     else:
-        print('Não foi possível inserir o dado.')
-
-    desconectar(conn)
-
-
-def inserir_autor():
-    """
-    Função para inserir dados na tabela autores.
-    :return: None
-    """
-    conn = conectar()
-    cursor = conn.cursor()
-    autor = input("Informe o nome do autor: ")
-
-    cursor.execute(f"INSERT INTO autores (nome) VALUES ('{autor}')")
-    conn.commit()
-
-    if cursor.rowcount == 1:
-        print(f"O autor {autor} foi inserido com sucesso.")
-    else:
-        print('Não foi possível inserir o dado.')
-
-    desconectar(conn)
-
-
-def inserir_editora():
-    """
-    Função para inserir dados na tabela editoras.
-    :return: None
-    """
-    conn = conectar()
-    cursor = conn.cursor()
-    editora = input("Informe o nome da editora: ")
-
-    cursor.execute(f"INSERT INTO editoras (nome) VALUES ('{editora}')")
-    conn.commit()
-
-    if cursor.rowcount == 1:
-        print(f"A editora {editora} foi inserida com sucesso.")
-    else:
-        print('Não foi possível inserir o dado.')
-
-    desconectar(conn)
-
-
-def inserir_livro():
-    """
-    Função para inserir dados na tabela livros.
-    :return: None
-    """
-    conn = conectar()
-    cursor = conn.cursor()
-    nome = input("Informe o nome do livro: ")
-    paginas = int(input("Informe o número de páginas: "))
-    terminado = input("Terminado? (Sim ou Não): ")
-    id_genero = int(input("Código do gênero: "))
-    id_autor = int(input("Código do autor: "))
-
-    cursor.execute(f"INSERT INTO livros (nome, paginas, terminado, id_genero, id_autor) VALUES "
-                   f"('{nome}', {paginas}, '{terminado}', {id_genero}, {id_autor})")
-    conn.commit()
-
-    if cursor.rowcount == 1:
-        print(f"O livro {nome} foi inserido com sucesso.")
-    else:
-        print('Não foi possível inserir os dados.')
-
-    desconectar(conn)
-
-
-def inserir_livro_editoras():
-    """
-    Função para inserir dados na tabela livros_editoras.
-    :return: None
-    """
-    conn = conectar()
-    cursor = conn.cursor()
-    id_livro = int(input("Informe o código do livro: "))
-    id_editora = int(input("Código da editora: "))
-
-    cursor.execute(f"INSERT INTO livros_editoras (id_livro, id_editora) VALUES ({id_livro}, {id_editora})")
-    conn.commit()
-
-    if cursor.rowcount == 1:
-        print(f"O livro e a editora foram inseridos com sucesso.")
-    else:
-        print('Não foi possível inserir os dados.')
-
-    desconectar(conn)
-
-
-def inserir_complemento():
-    """
-    Função para inserir dados na tabela complementos.
-    :return: None
-    """
-    conn = conectar()
-    cursor = conn.cursor()
-    id_base = int(input("Código do livro base: "))
-    id_comp = int(input("Código do livro complemento: "))
-
-    cursor.execute(f"INSERT INTO complementos (id_livro_base, id_livro_complementar) VALUES ({id_base}, {id_comp})")
-    conn.commit()
-
-    if cursor.rowcount == 1:
-        print(f"O complemento foi inserido com sucesso.")
-    else:
-        print('Não foi possível inserir os dados.')
+        print("Não foi possível inserir dados.")
 
     desconectar(conn)
 

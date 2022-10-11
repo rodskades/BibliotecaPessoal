@@ -39,41 +39,25 @@ def main():
     if opcao in [1, 2, 3, 4]:
         if opcao == 1:
             database.listar()
+
         elif opcao == 2:
             print("Informe em qual tabela deseja adicionar dados.")
             print("generos | autores | editoras | livros | livros_editoras | complementos")
             table = input()
-            if table in ['generos', 'autores', 'editoras', 'livros', 'livros_editoras', 'complementos']:
-                if table == 'generos':
-                    database.inserir_genero()
-                elif table == 'autores':
-                    database.inserir_autor()
-                elif table == 'editoras':
-                    database.inserir_editora()
-                elif table == 'livros':
-                    database.inserir_livro()
-                elif table == 'livros_editoras':
-                    database.inserir_livro_editoras()
-                elif table == 'complementos':
-                    database.inserir_complemento()
-            else:
-                print("Tabela não encontrada. ")
+            database.inserir(table)
+
         elif opcao == 3:
             print("Informe qual tabela deseja atualizar dados.")
             print("generos | autores | editoras | livros | livros_editoras | complementos")
             table = input()
-            if table in ['generos', 'autores', 'editoras', 'livros', 'livros_editoras', 'complementos']:
-                database.atualizar(table)
-            else:
-                print("Tabela não encontrada. ")
+            database.atualizar(table)
+
         elif opcao == 4:
             print("Informe em qual tabela deseja deletar dados.")
             print("generos | autores | editoras | livros | livros_editoras | complementos")
             table = input()
-            if table in ['generos', 'autores', 'editoras', 'livros', 'livros_editoras', 'complementos']:
-                database.deletar(table)
-            else:
-                print("Tabela não encontrada. ")
+            database.deletar(table)
+
         else:
             print('Opção inválida.')
     else:
